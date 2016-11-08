@@ -72,10 +72,20 @@ int main() {
 
     //cout << callPrice(4, 5, 2, 0.5, 0.25, 1, 1) << endl;
     //cout << putPrice(4, 5, 2, 0.5, 0.25, 2, 2) << endl;
-    int S, U, r, T, strike;
+    double S, U, r, strike;
+    int T;
     string filename, name, op, transaction;
     double price, profit, total = 0;
-    cin >> S >> U >> r >> T >> filename;
+    cout << "Enter today's stock price (S): ";
+    cin >> S;
+    cout << "Enter the up factor (U): ";
+    cin >> U;
+    cout << "Enter the interest rate (r): ";
+    cin >> r; 
+    cout << "Enter the number of periods (T): ";
+    cin >> T;
+    cout << "Enter the trader information filename: ";
+    cin >> filename;
 
     ifstream in(filename.c_str());
     while(in >> name){
@@ -88,8 +98,9 @@ int main() {
                     "Transaction will be ignored." << endl;
         } else {
             if(op == "call"){
-                profit = price - callPrice(S, strike, U, 1 - U, r, T, T);
+                profit = price - callPrice(S, strike, U, 1/U, r, T, T);
                 if(transaction == "buy"){
+		    //cout << name << profit << endl;
                     if(profit > 0){
                         total += profit;
                         cout << "I will sell to " + name + " in order to record a $" << profit <<" profit." << endl;
@@ -97,11 +108,11 @@ int main() {
                 } else {
                     if(profit < 0){
                         total -= profit;
-                        cout << "I will buy from " + name + " in order to record a $" << profit <<" profit." << endl;
+                        cout << "I will buy from " + name + " in order to record a $" << -profit <<" profit." << endl;
                     }
                 }
             } else {
-                profit = price - putPrice(S, strike, U, 1 - U, r, T, T);
+                profit = price - putPrice(S, strike, U, 1/U, r, T, T);
                 if(transaction == "buy"){
                     if(profit > 0){
                         total += profit;
@@ -110,7 +121,7 @@ int main() {
                 } else {
                     if(profit < 0){
                         total -= profit;
-                        cout << "I will buy from " + name + " in order to record a $" << profit <<" profit." << endl;
+                        cout << "I will buy from " + name + " in order to record a $" << -profit <<" profit." << endl;
                     }
                 }
             }
