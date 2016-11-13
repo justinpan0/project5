@@ -2,8 +2,8 @@
 // Project 5
 // Filename: project5.cpp
 //
-// Authors: Zimeng Pan (lab section: 101)
-// Uniqnames: zmpan
+// Authors: Zimeng Pan (lab section: 101), Boyu Wan (lab section: 104)
+// Uniqnames: zmpan, boyuwan
 //
 // Date Created: Nov. 5th
 // Date Submitted:
